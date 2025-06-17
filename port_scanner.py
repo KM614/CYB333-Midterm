@@ -8,15 +8,15 @@ from utils import timefunc
 # so you can use it later without passing it around as a parameter.
 
 class Scanner:
-    def __init__(self, ip):
+    def __init__(self, IP):
         # self.ip assigns the ip address to the Scanner object
-        self.ip = ip
+        self.IP = IP
         # self.open_ports is a list that will hold the open ports found during the scan.
         self.open_ports = [];
 
 # __repr__ is a method that defines how the object is represented.
     def __repr__(self): 
-        return 'Scanner: {}'.format(self.ip)
+        return 'Scanner: {}'.format(self.IP)
     
     
     def add_port(self, port):
@@ -43,7 +43,7 @@ class Scanner:
         # enough time for the connection to be established.
         s.settimeout(0.1)
 
-        result = s.connect_ex((self.ip, port))
+        result = s.connect_ex((self.IP, port))
 # If the result is 0, it means the port is open.
 # If the result is not 0, it means the port is closed or unavaliable.
 
@@ -63,8 +63,8 @@ class Scanner:
 
 @timefunc
 def main():
-    ip = 'scanme.nmap.org'
-    scanner = Scanner(ip)
+    IP = 'scanme.nmap.org'
+    scanner = Scanner(IP)
     scanner.scan(1, 1024)
     print(scanner.open_ports)
     scanner.write('./open_ports.txt')
